@@ -13,7 +13,25 @@ class Card(Randommer):
         Returns:
             dict: card data
         '''
-        pass
+        endpoint = "Card"
+        url = self.get_url() + endpoint # https://randommer.io/api/Card
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        if type is not None:
+            payload = {
+                "type": type
+            }
+            response = requests.get(url, params=payload, headers=headers)
+        else:
+            response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        
+        return response.status_code
 
     def get_card_types(self, api_key: str) -> list:
         '''get cars types from randommer
@@ -24,4 +42,22 @@ class Card(Randommer):
         Returns:
             list: list of types
         '''
-        pass
+        endpoint = "Card/Types"
+        url = self.get_url() + endpoint # https://randommer.io/api/Card/Types
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
+
+
+token = "2d794c6f46094ceb96bd719c1c26c984"
+card = Card()
+# print(card.get_card(api_key=token, type="mastercard"))
+print(card.get_card_types(api_key=token))

@@ -11,7 +11,21 @@ class Finance(Randommer):
         Returns:
             list: list of types
         '''
-        pass
+        endpoint="Finance/CryptoAddress/Types"
+
+        url = self.get_url() + endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
+
 
     def get_crypto_address(self, crypto_type: str, api_key: str) -> dict:
         '''get available crypto address
@@ -23,7 +37,28 @@ class Finance(Randommer):
         Returns:
             dict: crypto address
         '''
-        pass
+        endpoint="Finance/CryptoAddress"
+
+        url=self.get_url()+endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        if crypto_type is not None:
+
+            p={
+                "cryptoType":crypto_type
+            }
+
+            response=requests.get(url=url, params=p, headers=headers)
+        else:
+            response=requests.get(url=url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        
+        return response.status_code
 
     def get_countries(self, api_key: str) -> list:
         '''get available countries
@@ -34,7 +69,19 @@ class Finance(Randommer):
         Returns:
             list: crypto address
         '''
-        pass
+        endpoint="Finance/Countries"
+
+        url=self.get_url()+endpoint
+
+        headers={
+            "X-Api-Key":api_key
+        }
+        response=requests.get(url=url, headers=headers)
+
+        if response.status_code==200:
+
+            return response.json()
+        return response.status_code
 
     def get_iban_by_country_code(self, country_code: str, api_key: str) -> dict:
         '''get available countries
@@ -46,4 +93,28 @@ class Finance(Randommer):
         Returns:
             dict: idan data
         '''
-        pass
+        endpoint="Finance/Iban/{countryCode}"
+
+        url=self.get_url()+endpoint
+
+        headers={
+            "X-Api-Key":api_key
+        }
+        if country_code is not None:
+            p={
+                "countryCode":country_code
+            }
+            response=requests.get(url=url, params=p, headers=headers)
+        else:
+            response=requests.get(url=url, headers=headers)
+        # if response.status_code==200:
+        #     return response.json()
+        
+        # return response.status_code
+        return response.json()
+token="fed32ffb85214070af3f7863a24750fb"
+finance=Finance()
+# print(finance.get_crypto_address_types(api_key=token))
+# print(finance.get_crypto_address("BGold", token))
+# print(finance.get_countries(api_key=token))
+print(finance.get_iban_by_country_code(country_code="LI", api_key=token))

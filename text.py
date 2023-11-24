@@ -15,7 +15,26 @@ class Text(Randommer):
         Returns:
             str: Lorem text
         '''
-        pass
+        endpoint="Text/LoremIpsum"
+
+        url=self.get_url()+endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        p={
+            "loremType":loremType,
+            "type":type,
+            "number":number
+        }
+
+        response=requests.get(url=url, params=p, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        
+        return response.status_code
     
     def generate_password(self, api_key: str, length: int, hasDigits: bool, hasUppercase: bool, hasSpecial: bool) -> str:
         '''Generate lorem ipsum
@@ -30,4 +49,28 @@ class Text(Randommer):
         Returns:
             str: pasword
         '''
-        pass
+        endpoint="Text/Password"
+
+        url=self.get_url()+endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        p={
+            "length":length,
+            "hasDigits":hasDigits,
+            "hasUppercase":hasUppercase,
+            "hasSpecial":hasSpecial
+        }
+
+        response=requests.get(url=url, params=p, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        
+        return response.status_code
+token="fed32ffb85214070af3f7863a24750fb"
+text=Text()
+# print(text.generate_LoremIpsum(token, "normal", "paragraphs", 7))
+print(text.generate_password(token, 12, True, True, True))

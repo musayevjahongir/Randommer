@@ -14,7 +14,25 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
+        # endpoint="Name/Generate"
+
+        # url=self.get_url()+endpoint
+
+        # headers = {
+        #     "X-Api-Key": api_key
+        # }
+
+        # p={
+        #     "CountryCode":CountryCode,
+        #     "Quantity":Quantity
+        # }
+
+        # response=requests.get(url=url, params=p, headers=headers)
+
+        # if response.status_code == 200:
+        #     return response.json()
+        
+        # return response.status_code
     
     def get_IMEI(self, api_key: str, Quantity: int) -> list:
         '''get bulk imei
@@ -26,7 +44,19 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
+        endpoint="Phone/IMEI"
+
+        url=self.get_url()+endpoint
+
+        headers={
+            "X-Api-Key":api_key
+        }
+        p={
+            "quantity":Quantity
+        }
+        response=requests.get(url=url, params=p, headers=headers )
+        
+        return response.json()
     
     def is_valid(self, api_key: str, telephone: str, CountryCode: str) -> bool:
         '''get bulk imei
@@ -39,7 +69,20 @@ class Phone(Randommer):
         Returns:
             bool: is valid
         '''
-        pass
+        endpoint="Phone/Validata"
+
+        url=self.get_url()+endpoint
+
+        headers={
+            "X-Api-Key":api_key
+        }
+        p={
+            "telephone":telephone,
+            "CountryCode":CountryCode
+        }
+        response=requests.get(url=url, params=p, headers=headers )
+        
+        return response.json()
     
     def get_countries(self, api_key: str) -> list:
         '''get countries
@@ -50,4 +93,22 @@ class Phone(Randommer):
         Returns:
             list: lsit of countries
         '''
-        pass
+        endpoint="Phone/Countries"
+
+        url = self.get_url() + endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
+token="fed32ffb85214070af3f7863a24750fb"
+phone = Phone()
+# print(phone.generate(token, "+998", 2))
+# print(phone.get_IMEI(token, 3))
+print(phone.get_countries(token))

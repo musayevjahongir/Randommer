@@ -12,4 +12,20 @@ class SocialNumber(Randommer):
         Returns:
             str: number as str
         '''
-        pass
+        endpoint="SocialNumber"
+
+        url = self.get_url() + endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
+token="fed32ffb85214070af3f7863a24750fb"
+socialnumber=SocialNumber()
+print(socialnumber.get_SocialNumber(token))

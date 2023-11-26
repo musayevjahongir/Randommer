@@ -14,25 +14,25 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        # endpoint="Name/Generate"
+        endpoint="Phone/Generate"
 
-        # url=self.get_url()+endpoint
+        url=self.get_url()+endpoint
 
-        # headers = {
-        #     "X-Api-Key": api_key
-        # }
+        headers = {
+            "X-Api-Key": api_key
+        }
 
-        # p={
-        #     "CountryCode":CountryCode,
-        #     "Quantity":Quantity
-        # }
+        p={
+            "CountryCode":CountryCode,
+            "Quantity":Quantity
+        }
 
-        # response=requests.get(url=url, params=p, headers=headers)
+        response=requests.get(url=url, params=p, headers=headers)
 
-        # if response.status_code == 200:
-        #     return response.json()
+        if response.status_code == 200:
+            return response.json()
         
-        # return response.status_code
+        return response.status_code
     
     def get_IMEI(self, api_key: str, Quantity: int) -> list:
         '''get bulk imei
@@ -56,7 +56,10 @@ class Phone(Randommer):
         }
         response=requests.get(url=url, params=p, headers=headers )
         
-        return response.json()
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
     
     def is_valid(self, api_key: str, telephone: str, CountryCode: str) -> bool:
         '''get bulk imei
@@ -82,7 +85,10 @@ class Phone(Randommer):
         }
         response=requests.get(url=url, params=p, headers=headers )
         
-        return response.json()
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
     
     def get_countries(self, api_key: str) -> list:
         '''get countries
@@ -109,6 +115,7 @@ class Phone(Randommer):
         return response.status_code
 token="fed32ffb85214070af3f7863a24750fb"
 phone = Phone()
-# print(phone.generate(token, "+998", 2))
+# print(phone.generate(token, "LI", 7))
 # print(phone.get_IMEI(token, 3))
+# print(phone.is_valid(token, "+998990235051", "LI" ))
 print(phone.get_countries(token))

@@ -73,4 +73,4 @@ class Text(Randommer):
 token="fed32ffb85214070af3f7863a24750fb"
 text=Text()
 # print(text.generate_LoremIpsum(token, "normal", "paragraphs", 7))
-print(text.generate_password(token, 12, True, True, True))
+print(text.generate_password(token, 12, True, True, False))

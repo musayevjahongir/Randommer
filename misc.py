@@ -52,5 +52,5 @@ class Misc(Randommer):
 
 token="fed32ffb85214070af3f7863a24750fb"
 misc=Misc()
-# print(misc.get_cultures(api_key=token))
-print(misc.get_random_address(api_key=token,culture="en", number=7))
+print(misc.get_cultures(api_key=token))
+# print(misc.get_random_address(api_key=token,culture="en", number=7))

@@ -45,15 +45,13 @@ class Finance(Randommer):
             "X-Api-Key": api_key
         }
 
-        if crypto_type is not None:
 
-            p={
-                "cryptoType":crypto_type
-            }
+        p={
+            "cryptoType":crypto_type
+        }
 
-            response=requests.get(url=url, params=p, headers=headers)
-        else:
-            response=requests.get(url=url, headers=headers)
+        response=requests.get(url=url, params=p, headers=headers)
+
 
         if response.status_code == 200:
             return response.json()
@@ -93,28 +91,25 @@ class Finance(Randommer):
         Returns:
             dict: idan data
         '''
-        endpoint="Finance/Iban/{countryCode}"
+        endpoint=f"Finance/Iban/{country_code}"
 
         url=self.get_url()+endpoint
 
         headers={
             "X-Api-Key":api_key
         }
-        if country_code is not None:
-            p={
-                "countryCode":country_code
-            }
-            response=requests.get(url=url, params=p, headers=headers)
-        else:
-            response=requests.get(url=url, headers=headers)
-        # if response.status_code==200:
-        #     return response.json()
+        p={
+            "countryCode":country_code
+        }
+        response=requests.get(url=url, params=p, headers=headers)
+
+        if response.status_code==200:
+            return response.json()
         
-        # return response.status_code
-        return response.json()
+        return response.status_code
 token="fed32ffb85214070af3f7863a24750fb"
 finance=Finance()
 # print(finance.get_crypto_address_types(api_key=token))
 # print(finance.get_crypto_address("BGold", token))
 # print(finance.get_countries(api_key=token))
-print(finance.get_iban_by_country_code(country_code="LI", api_key=token))
+# print(finance.get_iban_by_country_code(country_code="LI", api_key=token))

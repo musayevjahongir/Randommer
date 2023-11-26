@@ -84,6 +84,6 @@ class Name(Randommer):
 
 token="fed32ffb85214070af3f7863a24750fb"
 name=Name()
-# print(name.get_name(api_key=token, nameType="firstname", quantity=7))
-# print(name.get_name_suggestions(api_key=token, startingWords="m"))
-print(name.get_name_cultures(token))
+print(name.get_name(api_key=token, nameType="firstname", quantity=7))
+# print(name.get_name_suggestions(api_key=token, startingWords="ma"))
+# print(name.get_name_cultures(token))
